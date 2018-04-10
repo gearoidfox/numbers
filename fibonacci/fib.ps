@@ -1,0 +1,96 @@
+%!PS-Adobe EPSF-3.0
+%%BoundingBox: 1918 869 4251 4642
+
+%
+% Visualise the Fibonacci sequence & it's relationship to golden rectangles
+% Draw successive squares of side length f(n) in a spiral pattern
+%
+
+% Sequence:
+/current 1 def % f(n)
+/prev 1 def    % f(n-1)
+
+/update_fib { % f(n+1) = f(n) + f(n-1)
+        /tmp prev def
+        /prev current def %scope is global
+        /current tmp current add def
+} def
+
+% Drawing details:
+/r 0.1 def
+/g 0.6 def
+/b 0.8 def
+/x 3600 def  % x coord of box UL corner
+/y 3600 def  % y coord of box UL corner
+/scale 10 def % scale of drawing
+/side prev scale mul def % box side length
+/s 20 string def
+/box { % box drawing function
+        newpath % box
+        x y moveto
+        side 0 rlineto
+        0 side neg rlineto
+        0 side sub 0 rlineto
+        0 side rlineto
+        closepath
+        gsave % switch to fill colour
+        r g b setrgbcolor
+        /g g 0.025 add def
+        /b b 0.075 sub def
+        /r r 0.075 add def
+        fill
+        grestore
+        stroke
+        
+        % Draw side length inside box
+        x side 2 div add y side 2 div sub moveto
+        %x y moveto
+
+        /Helvetica-Bold findfont
+        prev 2 mul 3 add scalefont
+        setfont
+        prev s cvs stringwidth
+        2 div 0 exch rmoveto
+        2 div neg 0 rmoveto
+
+        /Helvetica-Bold findfont
+        prev 2 mul 3 add scalefont
+        setfont
+        prev s cvs show
+} def
+
+
+
+%%%% Main loop
+box
+/spiral {
+        update_fib
+        /x x side add def
+        /side prev scale mul def % box side length
+        box
+
+        update_fib
+        /x x side add def
+        /side prev scale mul def % box side length
+        /y y side add def
+        /x x side sub def
+        box
+
+        update_fib
+        /side prev scale mul def % box side length
+        /x x side sub def
+        box
+
+        update_fib
+        /side2 side def
+        /y y side sub def
+        /side prev scale mul def % box side length
+        box
+        /y side2 y add def
+} def
+
+spiral
+spiral
+spiral
+
+showpage
