@@ -88,6 +88,29 @@ print_pairs(struct tnode *tree){
 }
 
 /*
+ * Free memory allocated for a struct tnode, and all children allocated by
+ * add_children()
+ */
+void
+free_tree(struct tnode *root)
+{
+        if(root->left != NULL){
+                free_tree(root->left);
+                root->left = NULL;
+        }
+        if(root->centre != NULL){
+                free_tree(root->centre);
+                root->centre = NULL;
+        }
+        if(root->right != NULL){
+                free_tree(root->right);
+                root->right = NULL;
+        }
+        free(root);
+        return;
+}
+
+/*
  * Create two trees with roots (2,1) and (3,1), then print the pairs at every
  * node of these trees.
  */
@@ -96,17 +119,25 @@ main(int argc, char **argv)
 {
         /* Specify maximum value N as an argument. Default value 100 */
         unsigned int max = 100;
-        struct tnode root1, root2;
+        struct tnode *root1, *root2;
+
         if(argc > 1){
                 max = atoi(argv[1]);
         }
-        root1.x = 2;
-        root1.y = 1;
-        root2.x = 3;
-        root2.y = 1;
-        add_children(&root1, max);
-        add_children(&root2, max);
-        print_pairs(&root1);
-        print_pairs(&root2);
+
+        root1 = malloc(sizeof(*root1));
+        root1->x = 2;
+        root1->y = 1;
+        add_children(root1, max);
+        print_pairs(root1);
+        free_tree(root1);
+
+        root2 = malloc(sizeof(*root2));
+        root2->x = 3;
+        root2->y = 1;
+        add_children(root2, max);
+        print_pairs(root2);
+        free_tree(root2);
+
         return 0;
 }
