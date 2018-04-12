@@ -4,7 +4,7 @@ Print terms in the fibonacci sequence up the largest term we can store in 128 bi
     ./xfib
     
 
-Be ~~boring~~ sensible and using a language that's portable and has arbitrary precision integer arithmetic: 
+Be ~~boring~~ sensible and use a language that's portable and has arbitrary precision integer arithmetic: 
 
     perl6 fibonacci.p6
 
