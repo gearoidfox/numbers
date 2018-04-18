@@ -4,4 +4,5 @@ Programs for calculating interesting numbers:
  - ``e/``  - approximate the transcendental number e.
  - ``fibonacci/`` -  calculate Fibonacci numbers.
  - ``pi/`` -  approximate the transcendental number π.
+ - ``prime/`` - find prime numbers.
 
