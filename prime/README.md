@@ -1,7 +1,7 @@
 # calculate prime numbers
 
-With the [Sieve of Sundaram](https://en.wikipedia.org/wiki/Sieve_of_Sundaram):
+Calculate primes up to N with the [Sieve of Sundaram](https://en.wikipedia.org/wiki/Sieve_of_Sundaram):
 
     make
-    ./sundaram
+    ./sundaram N
 
