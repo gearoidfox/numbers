@@ -1,7 +1,7 @@
-# calculate prime numbers
+# Calculate prime numbers
 
-Calculate primes up to N with the [Sieve of Sundaram](https://en.wikipedia.org/wiki/Sieve_of_Sundaram):
+ - Using the [Sieve of Sundaram](https://en.wikipedia.org/wiki/Sieve_of_Sundaram). Print all prime numbers from 2 to N:
 
-    make
-    ./sundaram N
+       make
+       ./sundaram N
 
