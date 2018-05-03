@@ -36,7 +36,7 @@ exit_success:
                 movq  $0,   %rdi   #   |
                 syscall            #   |
 exit_failure: 
-                movq  $60,  %rax   # Exit with status 0
+                movq  $60,  %rax   # Exit with status 1
                 movq  $1,   %rdi   #   |
                 syscall            #   |
 
