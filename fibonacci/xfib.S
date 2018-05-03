@@ -20,14 +20,12 @@ main_loop:
                 pop %r12               #  |
                 pop %rcx               #  |
 
-                xchg %r13,  %r15   # update upper quadwords
-                addq %r13,  %r15   #   
-                jc   exit_failure  # we've overflowed 128 bit integers
+                xaddq %r13,  %r15   # update upper quadwords
+                jc    exit_failure  # we've overflowed 128 bit integers
 
-                xchg %r12,  %r14   # update lower quadwords
-                addq %r12,  %r14   # 
-                jnc  no_carry      # check for carry on this addition
-                addq $1,    %r15   # Add carried bit to the upper quadword
+                xaddq %r12,  %r14   # update lower quadwords
+                jnc   no_carry      # check for carry on this addition
+                addq  $1,    %r15   # Add carried bit to the upper quadword
                 jc exit_failure    # and check for overflows there.
         no_carry:
                 decq %rcx          # Decrement counter 
