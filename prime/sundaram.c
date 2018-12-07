@@ -31,7 +31,7 @@ main(int argc, char **argv){
 
         // Mark all numbers of the form i+j+2ij as composite:
         for(j = 1; 3 * j < length; ++j){
-                for(i = 1; i < j; ++i){
+                for(i = 1; i <= j; ++i){
                         index = i + j + 2*i*j;
                         if (index > length) break;
                         sieve[index] = false;
