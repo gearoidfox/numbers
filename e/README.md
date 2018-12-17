@@ -3,7 +3,7 @@
 Programs to approximate **e**, the base of the natural logarithm.
 
 ### Using infinite series
-- By summing the series 1/(n!) for n = 0,1,2... :
+- Sum the series 1/(n!) for n = 0,1,2... :
 
     perl6 series.p6
 
