@@ -1,11 +1,19 @@
 # e
 
-Programs to estimate **e**, the base of the natural logarithm.
+Programs to approximate **e**, the base of the natural logarithm.
 
+### Using infinite series
 - By summing the series 1/(n!) for n = 0,1,2... :
 
     perl6 series.p6
 
-- Using binary search to find e such that the integral from 1 to e of the function 1/x is equal to 1:
+### Using numerical integration
+- Find a value for e such that the integral of dx/x from 1 to e is equal to 1.
   
     octave euler.m
+
+### Using numerial differentiation
+- Find a value for e such that d/dx e^x = e^x
+
+    make
+    ./e
