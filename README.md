@@ -5,4 +5,5 @@ Programs for calculating interesting numbers:
  - ``fibonacci/`` -  calculate Fibonacci numbers.
  - ``pi/`` -  approximate the transcendental number π.
  - ``prime/`` - find prime numbers.
+ - ``pythagorean/`` - find Pythagorean triples.
 
