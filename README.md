@@ -2,6 +2,7 @@
 Programs for calculating interesting numbers.
 
 ### Rational numbers:
+ - ``cfrac/`` - rewrite rationals as contned fractions.
  - ``coprime/`` -   find coprime integers.
  - ``farey/`` -  calculate Farey sequences.
  - ``fibonacci/`` -  calculate Fibonacci numbers.
