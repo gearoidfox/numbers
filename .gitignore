@@ -1,0 +1,20 @@
+# compiled files:
+*.o
+a.out
+prime/erato
+prime/sundaram
+e/e
+pi/montecarlo
+pythagorean/pythag
+coprime/coprime
+farey/farey
+cfrac/cfrac
+fibonacci/xfib
+
+# miscellaneous:
+*.txt
+*.csv
+tmp*
+.Rhistory
+.RData
+
