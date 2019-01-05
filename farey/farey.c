@@ -16,8 +16,7 @@ struct rational {
 };
 
 struct rational * farey(long a, long b, long c, long d, long max_denom);
-void unallocate(struct rational * list);
-
+void deallocate(struct rational * list);
 
 
 int
@@ -25,28 +24,57 @@ main(int argc, char** argv)
 {
         struct rational *head;
         struct rational *elem;
-        long max_denom = 10;
+        
+        struct rational *inner_head;
+        struct rational *inner_elem;
+        
+        long max_denom = 10; // maximum denominator, final pass (default)
+        long outer_max = 50; // maximum denominator, first pass
 
         if (argc > 2) {
                 return 0;
         } else if (argc == 2) {
                 max_denom = atoi(argv[1]);
                 if (max_denom < 1) return 1;
+                if (max_denom < outer_max) outer_max = max_denom;
         }
-
-        head = farey(0, 1, 1, 1, max_denom);
+        
+        // Do a rough division of the interval:
+        head = farey(0, 1, 1, 1, outer_max);
         if(NULL == head){
                 fprintf(stderr, "Error.\n");
                 return 1;
         }
-
+        // We have a list of reduced fractions with denominator 
+        // <= outer_max. Between each pair of elements in the
+        // list, calculate a new list of fractions with denominators
+        // less than max_denom.
+        // We allocate and deallocate memory for the inner list
+        // at each interval, so we don't run out.
         elem = head;
-        while (NULL != elem) {
+        while (NULL != elem) { // iterate over elements in the first list
                 printf("%lu %lu\n", elem->num, elem->denom);
+                if(elem->next != NULL) {
+                        inner_head = farey(elem->num, elem->denom,
+                                        elem->next->num, elem->next->denom,
+                                        max_denom);
+                        if(NULL == inner_head){
+                                fprintf(stderr, "Error.\n");
+                                return 1;
+                        }
+                        inner_elem = inner_head->next;
+                        // iterate over the new list 
+                        while(NULL != inner_elem->next){
+                                printf("%lu %lu\n", inner_elem->num, inner_elem->denom);
+                                inner_elem = inner_elem->next;
+                        }
+                        deallocate(inner_head);
+                }
+                
                 elem = elem->next;
         }
         
-        unallocate(head);
+        deallocate(head);
 
         return 0;
 }
@@ -116,7 +144,7 @@ farey(long a, long b, long c, long d, long max_denom)
                          * memory and return NULL;
                          */
                         if(NULL == new){
-                                unallocate(head); 
+                                deallocate(head); 
                                 return NULL;      
                         }
                         ++added;
@@ -134,12 +162,12 @@ farey(long a, long b, long c, long d, long max_denom)
 
 
 
-/* unallocate
+/* deallocate
  *
  * Free a linked-list created by farey()
  */
 void
-unallocate(struct rational * list)
+deallocate(struct rational * list)
 {
         struct rational *elem;
         struct rational *next;
