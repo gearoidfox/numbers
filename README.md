@@ -9,7 +9,8 @@ Programs for calculating interesting numbers.
  - ``prime/`` - find prime numbers.
  - ``pythagorean/`` - find Pythagorean triples.
  
- ### Irrational numbers:
+### Irrational numbers:
  - ``e/``  - approximate the transcendental number e.
  - ``pi/`` - approximate the transcendental number π.
+ - ``roots/`` - find square roots.
 
